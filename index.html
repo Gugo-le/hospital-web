@@ -9,11 +9,11 @@
 <body>
 <div id="map" style="width:100%;height: 125rem;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=your-appkey"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=your_app_key"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.192777, 127.077645), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
 
@@ -39,7 +39,7 @@ if (navigator.geolocation) {
 
 } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+    var locPosition = new kakao.maps.LatLng(37.192777, 127.077645),    
         message = 'geolocation을 사용할수 없어요..'
 
     displayMarker(locPosition);
@@ -83,6 +83,14 @@ var hospitalloc = [
     {
         title: '동탄더하다한방병원',
         latlng: new kakao.maps.LatLng(37.194083, 127.074327)
+    },
+    {
+        title: '베스트아이들병원',
+        latlng: new kakao.maps.LatLng(37.205192, 127.072379)
+    },
+    {
+        title: '센트럴아동병원',
+        latlng: new kakao.maps.LatLng(37.204583, 127.072041)
     }
 ];
 
