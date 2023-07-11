@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>hospital</title>
-    
+
 </head>
 <body>
 <div id="map" style="width:100%;height: 900px;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=app-key"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=Your_appkey"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
@@ -17,29 +17,30 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
- 
+
+
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 if (navigator.geolocation) {
-    
+
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function(position) {
-        
+
         var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
-        
+
         var locPosition = new kakao.maps.LatLng(lat, lon) // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-            
-        
+
+
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition);
-            
+
       });
-    
+
 } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-    
+
     var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
         message = 'geolocation을 사용할수 없어요..'
-        
+
     displayMarker(locPosition);
 }
 
@@ -48,31 +49,51 @@ if (navigator.geolocation) {
 function displayMarker(locPosition) {
 // 마커 이미지의 이미지 주소입니다
 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-    
+
     // 마커 이미지의 이미지 크기 입니다
     var imageSize = new kakao.maps.Size(24, 35); 
-    
+
     // 마커 이미지를 생성합니다    
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-    
+
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: locPosition, // 마커를 표시할 위치
         image : markerImage // 마커 이미지 
     });
+// 지도 중심좌표를 접속위치로 변경합니다
+map.setCenter(locPosition);   
 
-    // 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var hospitalloc = [
+    {
+        title: '한림대 동탄성심병원', 
+        latlng: new kakao.maps.LatLng(37.216608, 127.079869)
+    },
+    {
+        title: '21세기 우리의원', 
+        latlng: new kakao.maps.LatLng(37.193534, 127.073714)
+    },
+    {
+        title: '열린한세병원', 
+        latlng: new kakao.maps.LatLng(37.194805, 127.074327)
+    },
+    {
+        title: '동탄더하다한방병원',
+        latlng: new kakao.maps.LatLng(37.194083, 127.074327)
+    }
+];
+
+for (var i = 0; i < hospitalloc.length; i++) {
+    var hospitalmarker = new kakao.maps.Marker ({
+        map: map, // 마커를 표시할 지도
+        position: hospitalloc[i].latlng, // 마커를 표시할 위치
+        title: hospitalloc[i].title, //  마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됨.
+    });
+}
 
 
-// 마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(37.208996, 127.062844); 
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
 }
 </script>
 </body>
